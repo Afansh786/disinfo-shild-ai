@@ -1,0 +1,4 @@
+# Disinfo Shield AI 2026 — Python Dependencies
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+pydantic==2.7.4

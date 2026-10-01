@@ -1,0 +1,219 @@
+# Disinfo Shield AI 2026 — Complete Project Guide
+
+---
+
+## 🚀 How to Open the App
+
+You have **3 ways** to launch, from simplest to most advanced:
+
+---
+
+### Method 1: Double-Click (Easiest — No Setup Required)
+
+1. Open your project folder: `d:\Antigravjity workshowp\`
+2. **Double-click** [`Launch_Disinfo_App.bat`](file:///d:/Antigravjity%20workshowp/Launch_Disinfo_App.bat)
+3. The dashboard opens instantly in a frameless browser window (Edge or Chrome)
+
+> [!TIP]
+> This is the fastest way. The entire UI is self-contained in a single HTML file — no server, no Python, no installation needed. All features work with built-in sample data.
+
+---
+
+### Method 2: Open the HTML File Directly
+
+1. Navigate to `d:\Antigravjity workshowp\`
+2. **Right-click** [`desktop_app.html`](file:///d:/Antigravjity%20workshowp/desktop_app.html) → **Open with** → Edge or Chrome
+3. The full dashboard loads in your browser
+
+---
+
+### Method 3: Run the Full Backend (API + UI Together)
+
+This gives you the complete experience — a Python server that handles data ingestion, analysis, and serves the dashboard.
+
+```powershell
+# Step 1: Open terminal in the project folder
+cd "d:\Antigravjity workshowp"
+
+# Step 2: Create a virtual environment (one-time)
+python -m venv venv
+
+# Step 3: Activate it
+.\venv\Scripts\activate
+
+# Step 4: Install dependencies (one-time)
+pip install -r requirements.txt
+
+# Step 5: Start the server
+uvicorn backend.app:app --reload
+
+# Step 6: Open your browser to:
+# http://localhost:8000
+```
+
+> [!NOTE]
+> With Method 3, the API endpoints also become available:
+> - `http://localhost:8000/docs` — Interactive Swagger API documentation
+> - `http://localhost:8000/analyze` — Trigger analysis pipeline
+> - `http://localhost:8000/campaigns` — View detected campaigns
+
+---
+
+## 🔍 What Is This Project?
+
+**Disinfo Shield AI 2026** is an AI-powered system that:
+
+1. **Detects fake/misleading content** using NLP pattern analysis
+2. **Identifies coordinated campaigns** where multiple accounts push the same narrative
+3. **Tracks cross-platform propagation** across 8 social networks
+4. **Visualizes threat networks** with interactive force-directed graphs
+5. **Provides analyst tools** for forensic investigation and reporting
+
+It's designed for **journalists, fact-checkers, researchers, and security analysts** who need to identify coordinated disinformation operations.
+
+---
+
+## 🏗️ Project Architecture
+
+```
+d:\Antigravjity workshowp\
+│
+├── desktop_app.html          ← 🖥️  THE MAIN APP (open this!)
+├── Launch_Disinfo_App.bat    ← 🚀  One-click launcher
+├── requirements.txt          ← 📦  Python dependencies
+│
+├── backend/                  ← 🐍  Python FastAPI Server
+│   ├── app.py                    API endpoints (6 routes)
+│   ├── db.py                     SQLite database layer
+│   ├── pipeline.py               3-stage analysis pipeline
+│   └── connectors/               Platform data collectors
+│       ├── twitter.py                Twitter/X connector
+│       └── reddit.py                 Reddit connector
+│
+├── models/                   ← 🧠  AI/ML Models
+│   ├── disinfo_classifier.py     Fake-news text classifier
+│   └── campaign_cluster.py       Campaign grouping engine
+│
+├── data/                     ← 💾  Database storage (auto-created)
+│
+├── Dockerfile.backend        ← 🐳  Docker container config
+├── docker-compose.yml        ← 🐳  Docker orchestration
+└── README.md                 ← 📖  Documentation
+```
+
+---
+
+## 📊 What Each Tab Does
+
+The dashboard has **5 tabs** — here's what each one does:
+
+### Tab 1: Multi-Platform Graph
+An **interactive network visualization** showing how disinformation flows across platforms.
+
+- **Hexagon nodes** = Campaign seed origins (the initial fabricated content)
+- **Circle nodes** = Platform accounts that amplify the content
+- **Edges** = Propagation paths between platforms
+- **Click any node** → The right panel shows a forensic dossier (CIB score, platform, campaign, forward count)
+- **Filter buttons** → Show only WhatsApp, Instagram, TikTok, Twitter, etc.
+- **Recalculate** → Re-runs the force-directed physics layout
+
+### Tab 2: AI Text Analyzer
+Paste any text and get an instant **disinformation risk assessment**.
+
+- Scores text on 4 dimensions: Sensationalism, Emotional Manipulation, Attribution Deficit, Cross-Platform Virality
+- Detects **forensic indicators** like urgency anchors, authority name-dropping, censorship panic bait, WhatsApp forward signatures
+- Has 6 pre-loaded samples including a **legitimate news baseline** to show the difference
+- Three sensitivity modes: High Forensic, Strict, Permissive
+- "Inject into Graph" button adds the analyzed text as a new node in the network
+
+### Tab 3: Tracked Campaigns
+Shows the active coordinated campaigns being tracked across multiple platforms:
+
+| Campaign | Apparatus / Origin | Key Vectors & Forensic Narrative | Severity |
+|----------|-------------------|----------------------------------|----------|
+| **Pakistan DGISPR Cyber-Ops** | Pakistan DGISPR (State-Backed) | AI-generated deepfakes (Air Defence JCO clip), recycled 2021 MiG-21 crash clips claiming downed Rafale jet, fabricated Punjab satellite destruction imagery | `CRITICAL` |
+| **DragonMatrix AI Swarms** | Chinese State Media & AI Networks | Bot swarms amplifying false reports of Indian Rafale losses to commercially market Chinese J-20/J-35 stealth fighters to international buyers | `CRITICAL` |
+| **PrimeTimeWar Rating Rush** | Domestic Commercial TV Networks | Mainstream TV airing Arma 3 video game combat simulations as real-time airstrikes, forcing 15% military operational debunking load (Op Sindoor) | `HIGH` |
+| **FogOfWar Echo Swarms** | Hyper-Nationalist Echo Chambers | Exploiting fog of war, justifying fake news for morale warfare, coordinated mass-reporting and harassment of fact-checking bodies | `HIGH` |
+| **PanicRun** | Financial Panic Astroturf | Bank run FUD via Instagram carousels + WhatsApp + Reddit | `CRITICAL` |
+| **DeepClone Impersonation** | Neural Voice Cloning Rings | Cloned leadership audio directives & investment schemes | `CRITICAL` |
+| **Operation Aurora** | Dark Web Astroturf | BioLab conspiracy across WhatsApp voice notes + TikTok + X bot swarms | `CRITICAL` |
+| **GridBlackout Panic** | Regional Civic Astroturf | Electricity board cutoff and substation collapse rumors | `HIGH` |
+| **CivicDistort** | Municipal Astroturf | Vehicle ban + voting misinformation via Facebook + WhatsApp | `HIGH` |
+| **MaritimeDisrupt** | Naval Telemetry Spoofers | AIS telemetry manipulation & fake warship collision claims | `HIGH` |
+
+Each card shows account counts, forward velocity, apparatus badges, tactics breakdown, fabricated claims, and an "Isolate in Graph" button.
+
+### Tab 4: Platform Cascade
+Shows **how disinformation spreads over time** with:
+
+- **Line chart**: WhatsApp forward velocity, Instagram/TikTok views, and Twitter bot spikes across 24 hours
+- **Doughnut chart**: Distribution of activity across 7 platforms
+- **Cascade flow diagram**: The 6-stage lifecycle from Dark Web seeding → Telegram broadcast → WhatsApp chains → Instagram/TikTok viral → Twitter astroturf → Reddit mainstream discourse
+
+### Tab 5: Intercepted Feed
+A **real-time table** of intercepted suspicious posts across all 8 platforms.
+
+- Shows platform badge, author, content, CIB (Coordinated Inauthentic Behavior) score, and campaign attribution
+- WhatsApp forwarded messages get a special "Fwd" badge
+- **Trace button** → Sends the post to the AI Analyzer for detailed inspection
+- **Simulate Ingestion** → Injects a new fake post into the feed (demonstrates real-time capability)
+- **Export CSV** → Downloads the entire feed as a CSV file
+
+---
+
+## 🧠 How the Backend Works
+
+When you run the server (Method 3), the pipeline executes 3 stages:
+
+```
+Stage 1: COLLECT       Stage 2: CLASSIFY        Stage 3: CLUSTER
+─────────────────      ─────────────────        ─────────────────
+Twitter connector      For each post:           Group posts by
+  → 8 tweets           "misinformation"         campaign keyword
+Reddit connector         or "suspicious"        signatures (4
+  → 6 posts              or "legitimate"        known archetypes)
+                       + confidence score       + severity rating
+```
+
+All results are saved to a **SQLite database** at `data/disinfo.db`.
+
+### API Endpoints
+
+| Method | URL | What It Does |
+|--------|-----|--------------|
+| `GET /` | Serves the dashboard UI |
+| `POST /ingest` | Submit a post for storage |
+| `POST /analyze` | Run the full 3-stage pipeline |
+| `GET /campaigns` | Get all detected campaigns |
+| `GET /posts` | Get all stored posts |
+| `GET /search?q=keyword` | Search posts by keyword |
+
+---
+
+## 🛡️ Platforms Covered
+
+| # | Platform | Icon | Role in Disinfo |
+|---|----------|------|-----------------|
+| 1 | WhatsApp | 💬 | "Dark social" — encrypted forwards are invisible to platforms |
+| 2 | Instagram | 📸 | Carousel infographics and Reels drive visual virality |
+| 3 | TikTok | 🎵 | AI voiceover clips get millions of views via algorithm |
+| 4 | Twitter/X | 🐦 | Bot swarms force hashtags to trend |
+| 5 | Telegram | ✈️ | Conspiracy channels seed narratives |
+| 6 | Reddit | 🔴 | Pseudo-intellectual validation and community spillover |
+| 7 | Facebook | 👤 | Community groups spread forged notices |
+| 8 | YouTube | ▶️ | Long-form conspiracy content |
+
+---
+
+## ⚡ Quick Summary
+
+| Question | Answer |
+|----------|--------|
+| **How to open?** | Double-click `Launch_Disinfo_App.bat` |
+| **What is it?** | AI-powered disinfo detection across 8 platforms |
+| **What tech?** | Python/FastAPI backend + HTML/JS/CSS frontend |
+| **Need internet?** | Only for fonts and icons (dashboard works offline otherwise) |
+| **Need Python?** | No for the UI, Yes for the backend API |
+| **Database?** | SQLite, auto-created in `data/` folder |
+| **Docker?** | Optional — `docker-compose up --build` |
